@@ -1,0 +1,9 @@
+name: unicode_blocr
+version: 0.1.0
+
+authors:
+  - Julien Reichardt <mi@jrei.ch>
+
+description: Identify the Unicode block to which a character belongs
+
+license: ISC
