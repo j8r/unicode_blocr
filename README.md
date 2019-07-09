@@ -1,5 +1,8 @@
 # Unicode Blocr
 
+[![Build Status](https://cloud.drone.io/api/badges/j8r/unicode_blocr/status.svg)](https://cloud.drone.io/j8r/unicode_blocr)
+[![ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](https://en.wikipedia.org/wiki/ISC_license)
+
 Identify the Unicode block to which a character belongs.
 
 This library can be used to identify the type of characters, and eventually filter them (for example emoticons).
