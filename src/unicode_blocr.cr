@@ -1,6 +1,8 @@
 # In Unicode, a block is defined as one contiguous range of code points (https://en.wikipedia.org/wiki/Unicode_block).
 # Here, each value corresponds to the excluded end of the block range.
+
 enum UnicodeBlock
+  Null                                       =   0x0000
   BasicLatin                                 =   0x0080
   Latin1Supplement                           =   0x0100
   LatinExtendedA                             =   0x0180
@@ -289,8 +291,18 @@ enum UnicodeBlock
     {% for member in @type.constants %}\
     when .< {{member.id}}.value then {{member.id}}
     {% end %}\
-    else raise "not an unicode charater: " + character
+    else raise "not an unicode character: " + character
     end
     {% end %}
+  end
+
+  # Yields each non-control character from the start block to the current one included.
+  def each_char(start_block : UnicodeBlock = Null, &block : Char ->) : Nil
+    i = 0
+    while start_block.value <= i < value
+      chr = i.unsafe_chr
+      yield chr if !chr.control?
+      i += 1
+    end
   end
 end

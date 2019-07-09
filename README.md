@@ -32,23 +32,16 @@ puts UnicodeBlock.new 'a' #=> UnicodeBlock::BasicLatin
 puts UnicodeBlock.new 'é' #=> UnicodeBlock::Latin1Supplement
 ```
 
-### Emoji filter
+### Filter characters
 
-To keep all characters inferior to a block range, here `MiscellaneousSymbolsandPictographs` and `Emoticons`, we can select all characters belonging to the blocks up to the one just before `MiscellaneousSymbolsandPictographs`, which is `EnclosedIdeographicSupplement`.
-
-More complex conditions can be used to keep characters belonging to certains Unicode block ranges.
+To keep all characters inferior to a block range, here `MiscellaneousSymbolsandPictographs` and `Emoticons`,
+we delete all characters belonging to blocks above `MiscellaneousSymbolsandPictographs`.
 
 ```crystal
 require "unicode_blocr"
 
-msg = String.build do |str|
-  "hi!😊".each_char do |char|
-    if char.ord < UnicodeBlock::EnclosedIdeographicSupplement.value
-      str << char
-    end
-  end
-end
-puts msg #=> Hi!
+puts "hi😊".delete &.ord.>= UnicodeBlock::EnclosedIdeographicSupplement.value #=> hi
+puts "café".delete &.ord.>= UnicodeBlock::BasicLatin.value #=> caf
 ```
 
 ## License
